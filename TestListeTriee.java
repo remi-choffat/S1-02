@@ -11,7 +11,7 @@ public class TestListeTriee {
 
 	/**
 	 * methode de lancement des tests
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -35,10 +35,10 @@ public class TestListeTriee {
 
 			// verifie la valeur
 			assertEquals("mauvaise valeur",reponse[i],lT.val(p));
-			
+
 			// decale place
 			p = lT.suc(p);
-		} 
+		}
 		// verification liste finie
 		assertEquals("liste plus grnde que prevue",true,lT.finliste(p));
 	}
@@ -47,9 +47,9 @@ public class TestListeTriee {
 	// Ajouts dans liste Triee (debute par 0)
 	// #####################################
 
-	
+
 	/**
-	 * test d'ajouts 
+	 * test d'ajouts
 	 */
 	public void test_01_ajoutTrie() {
 	    ListeTriee lT = new ListeTriee(new ListeProf());
@@ -58,25 +58,25 @@ public class TestListeTriee {
 	    String[] reponse= {"a","b","c"};
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
-	    }    	
-	    
+	    }
+
 	    // verification
 	    verifie(lT, reponse);
 	}
 
 
 	/**
-	 * test d'ajouts 
+	 * test d'ajouts
 	 */
 	public void test_02_ajoutInverse() {
 	    ListeTriee lT = new ListeTriee(new ListeProf());
-	    
+
 	    String[] mots= {"c","b","a"};
 	    String[] reponse= {"a","b","c"};
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
-	    }    	
-	    
+	    }
+
 	    // verification
 	    verifie(lT, reponse);
 	}
@@ -86,13 +86,13 @@ public class TestListeTriee {
 	 */
 	public void test_03_ajoutQuelconque() {
 	    ListeTriee lT = new ListeTriee(new ListeProf());
-	    
+
 	    String[] mots= {"c","d","b","e","a","f"};
 	    String[] reponse= {"a","b","c","d","e","f"};
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
-	    }    	
-	    
+	    }
+
 	    // verification
 	    verifie(lT, reponse);
 	}
@@ -108,13 +108,13 @@ public class TestListeTriee {
 	    String[] reponse= {"a","b","c","d"};
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
-	    }    	
-	    
+	    }
+
 	    // verification
 	    verifie(lT, reponse);
 	}
 
-        /**
+  /**
 	 * test d'ajouts en queue
 	 */
 	public void test_05_ajoutTestQueue() {
@@ -126,13 +126,13 @@ public class TestListeTriee {
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
 	    }
-	    
+
 	    // verification
 	    verifie(lT, reponse);
 	}
 
    /**
-	 * test d'ajouts 
+	 * test d'ajouts
 	 */
 	public void test_06_ajoutEgal() {
 	    ListeTriee lT = new ListeTriee(new ListeProf());
@@ -141,13 +141,62 @@ public class TestListeTriee {
 	    String[] reponse= {"a","a"};
 	    for (int i = 0; i < mots.length; i++){
 		lT.adjlisT(mots[i]);
-	    }    	
-	    
+	    }
+
 	    // verification
 	    verifie(lT, reponse);
 	}
 
 
+	/**
+	 * test de suppression en tete
+	 */
+	public void test_07_suppTete() {
+	    ListeTriee lT = new ListeTriee(new ListeProf());
 
+	    String[] mots= {"a","b","c"};
+	    String[] reponse= {"b","c"};
+			for (int i = 0; i < mots.length; i++){
+				lT.adjlisT(mots[i]);
+	    }
+			lT.suplisT("a");
+
+	    // verification
+	    verifie(lT, reponse);
+	}
+
+	/**
+	 * test de suppression en queue
+	 */
+	public void test_08_suppQueue() {
+			ListeTriee lT = new ListeTriee(new ListeProf());
+
+			String[] mots= {"a","b","c"};
+			String[] reponse= {"a","b"};
+			for (int i = 0; i < mots.length; i++){
+				lT.adjlisT(mots[i]);
+			}
+			lT.suplisT("c");
+
+			// verification
+			verifie(lT, reponse);
+	}
+
+	/**
+	 * test de suppression quelconque
+	 */
+	public void test_09_suppQuelconque() {
+			ListeTriee lT = new ListeTriee(new ListeProf());
+
+			String[] mots= {"a","b","c"};
+			String[] reponse= {"a","c"};
+			for (int i = 0; i < mots.length; i++){
+				lT.adjlisT(mots[i]);
+			}
+			lT.suplisT("b");
+
+			// verification
+			verifie(lT, reponse);
+	}
 
 }
