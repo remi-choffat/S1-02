@@ -22,8 +22,7 @@ public class ListeTriee{
      * @return tete de liste
      */
     public int tete(){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+		return this.liste.tete();
     }
 	
     /**
@@ -32,8 +31,7 @@ public class ListeTriee{
      * @return place derriere p dans la liste
      */
     public int suc(int p){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+	return liste[p].getSuc();
     }
     
     /**
@@ -42,8 +40,7 @@ public class ListeTriee{
      * @return la valeur associee  p
      */
     public String val(int p){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+	return liste[p].getVal();
     }
  
     /**
@@ -52,8 +49,7 @@ public class ListeTriee{
      * @return vrai si p est a la fin de la liste, faux sinon
      */   
     public boolean finliste(int p){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+        return liste[p].suc==-1;
     }
 	
     
@@ -62,8 +58,7 @@ public class ListeTriee{
      * @param chaine element a inserer
      */
     public void adjlisT(String chaine){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+	
     }
 	
     /**
