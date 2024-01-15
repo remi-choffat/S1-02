@@ -8,15 +8,15 @@
 
 public class Principale{
 
-    private static final String[] ELEMENTS_DE_DEBUT
-	= {"ABITEBOUL", "ADLEMAN", "AL-KINDI", "ALUR", "BERNERS-LEE",
-	"BOOLE", "BUCHI", "BUTLER", "CLARKE", "CURRY"};
-    private static final String[] ELEMENTS_DE_FIN
-	= {"RABIN", "RIVEST", "SHAMIR", "SIFAKIS", "TORVALDS",
-	"TURING", "ULLMAN", "VALIANT", "WIRTH", "YAO"};
+    // private static final String[] ELEMENTS_DE_DEBUT
+	// = {"ABITEBOUL", "ADLEMAN", "AL-KINDI", "ALUR", "BERNERS-LEE",
+	// "BOOLE", "BUCHI", "BUTLER", "CLARKE", "CURRY"};
+    // private static final String[] ELEMENTS_DE_FIN
+	// = {"RABIN", "RIVEST", "SHAMIR", "SIFAKIS", "TORVALDS",
+	// "TURING", "ULLMAN", "VALIANT", "WIRTH", "YAO"};
     
-    // NOTE: pour fichier 10 000
-    // 	private static final String[] ELEMENTS_DE_DEBUT_SUPPR
+    // // NOTE: pour fichier 10 000
+    // private static final String[] ELEMENTS_DE_DEBUT_SUPPR
     // = {"ABBADI", "ABERGEL", "ALIAS", "ALIOUI", "AKKUS", "ALAZARD",
     // "ALLA", "AIDARA", "ABRANTES", "AARAB"};
     // NOTE: pour fichier 1 000
@@ -48,12 +48,18 @@ public class Principale{
     }
 		
     public static void main(String [] args){
-	System.out.println("Bienvenue !");
+	// System.out.println("Bienvenue !");
 
-	//Exemple d'utilisation de la classe EcritureFichier
-	EcritureFichier fichier = new EcritureFichier("resultats.csv");
-	fichier.ouvrirFichier();
-	fichier.ecrireLigne("liste;operation;emplacement;duree");
-	fichier.fermerFichier();
-    }
+	// //Exemple d'utilisation de la classe EcritureFichier
+	// EcritureFichier fichier = new EcritureFichier("resultats.csv");
+	// fichier.ouvrirFichier();
+	// fichier.ecrireLigne("liste;operation;emplacement;duree");
+	// fichier.fermerFichier();
+    // }
+    
+    ListeChainee LCH=new ListeChainee(10000);
+    ListeContigue LC=new ListeContigue(10000);
+    ListeTriee LT=new ListeTriee(LC);
+    ListeTriee LT2=new ListeTriee(LCH);
+}
 }

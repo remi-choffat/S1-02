@@ -62,7 +62,7 @@ public class ListeTriee{
     int pPre =0;
     boolean inserer = false;
     while(!inserer && !this.liste.finliste(p)){
-        if(this.liste.val(p).compareTo(chaine)==1){
+        if(this.liste.val(p).compareTo(chaine) > 0){
             if(p==this.liste.tete()){
                 this.liste.adjtlis(chaine);
             }
@@ -88,7 +88,7 @@ public class ListeTriee{
      * @param chaine l'element a supprimer 
      */
     public void suplisT(String chaine){
-	int ananas=0;
+	
     }
 		
     public String toString(){
