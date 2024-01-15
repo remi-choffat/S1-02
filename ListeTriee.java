@@ -11,12 +11,12 @@ public class ListeTriee{
 
     // Attribut de liste sous-jacente
     private Liste liste;
-    
+
     public ListeTriee(Liste listevide){
 	// Affectation de la liste vide à l'attribut privé
 	liste = listevide;
     }
-    
+
     /**
      * retourne la premiere place de la liste
      * @return tete de liste
@@ -24,7 +24,7 @@ public class ListeTriee{
     public int tete(){
 		return this.liste.tete();
     }
-	
+
     /**
      * permet de connaitre la place suivante dans la liste
      * @param p place en cours
@@ -33,7 +33,7 @@ public class ListeTriee{
     public int suc(int p){
 	    return this.liste.suc(p);
     }
-    
+
     /**
      * retourne la valeur associee a la place p
      * @param p place de la liste
@@ -42,56 +42,73 @@ public class ListeTriee{
     public String val(int p){
 	    return this.liste.val(p);
     }
- 
+
     /**
      * indique si la place p est a la fin de la liste ou non
      * @param p place de la liste
      * @return vrai si p est a la fin de la liste, faux sinon
-     */   
+     */
     public boolean finliste(int p){
         return this.liste.finliste(p);
     }
-	
-    
+
+
     /**
      * ajoute un element au bon endroit dans la liste triee
      * @param chaine element a inserer
      */
     public void adjlisT(String chaine){
-	int p = this.liste.tete();
-    int pPre =0;
-    boolean inserer = false;
-    while(!inserer && !this.liste.finliste(p)){
-        if(this.liste.val(p).compareTo(chaine)==1){
-            if(p==this.liste.tete()){
-                this.liste.adjtlis(chaine);
+  	  int p = this.liste.tete();
+      int pPre =0;
+      boolean insere = false;
+      if (!this.liste.finliste(p)){
+        while(!insere && !this.liste.finliste(p)){
+            if(this.liste.val(p).compareTo(chaine)==1){
+                if(p==this.liste.tete()){
+                    this.liste.adjtlis(chaine);
+                }
+                else{
+                    this.liste.adjlis(pPre, chaine);
+                }
+                insere=true;
+
             }
             else{
-                this.liste.adjlis(pPre, chaine);
+                pPre=p;
+                p=this.liste.suc(p);
             }
-            inserer=true;
 
         }
-        else{
-            pPre=p;
-            p=this.liste.suc(p);
+        if(!insere){
+            this.liste.adjlis(pPre, chaine);
         }
+        }
+    else {
+      this.liste.adjtlis(chaine);
+  }
+}
 
-    }
-    if(!inserer){
-        this.liste.adjlis(pPre, chaine);
-    }
-    }
-	
     /**
      * permet de supprimer un element d'une liste. Supprime le premier element dont la valeur est egale a "chaine" ; ne fait rien si "chaine" n'appartient pas a la liste.
-     * @param chaine l'element a supprimer 
+     * @param chaine l'element a supprimer
      */
-    public void suplisT(String chaine){
-	int ananas=0;
+  public void suplisT(String chaine){
+    int p = this.liste.tete();
+    boolean supprime = false;
+    int pPre = 0;
+    if (!this.liste.finliste(p)){
+      while(!supprime && !this.liste.finliste(p)){
+          if(this.liste.val(p).compareTo(chaine)==0){
+              this.liste.suplis(p);
+              supprime=true;
+          }
+          pPre = p;
+          p = this.liste.suc(p);
+      }
     }
-		
+  }
+
     public String toString(){
-	return liste.toString();
+	     return liste.toString();
     }
 }
