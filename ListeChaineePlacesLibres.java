@@ -2,28 +2,35 @@
  * Classe qui modelise une liste chainee sous la forme d'un tableau de maillons
  * - chaque maillon represente un element de la liste
  * - le successeur est stocke explicitement dans chaque maillon
- * 
- * L'entier -1 designe la fin de liste, nil  
- * 
+ *
+ * L'entier -1 designe la fin de liste, nil
+ *
  */
 
 public class ListeChaineePlacesLibres implements Liste {
 
-	
+
     /**
      * attributs de gestion de la liste
      */
     private int teteLibre;
     private int tete;
     private MaillonChaine[] tab;
-	
+
     /**
-     * constructeur 
-     * @param taillemax de la liste
+     * constructeur
+     * @param tMax de la liste
      */
     public ListeChaineePlacesLibres(int tMax) {
-	//A COMPLETER
-	throw (new error ("A compléter"));
+			if (tMax > 0){
+			this.tab = new MaillonChaine[tMax];
+			}
+			else {
+				this.tab = new MaillonChaine[1];
+			}
+			for (int i=0; i<this.tab.length;i++) this.tab[i]=new MaillonChaine(null, -2);
+			this.tete = -1;
+			this.teteLibre = 0;
     }
 
     /**
@@ -34,7 +41,7 @@ public class ListeChaineePlacesLibres implements Liste {
 	return this.tete;
     }
 
-	
+
     /**
      * savoir si une place est en fin
      * si la place vaut nil
@@ -43,7 +50,7 @@ public class ListeChaineePlacesLibres implements Liste {
     public boolean finliste(int p) {
 	return p == -1;
     }
-    
+
     /**
      * la successeur de maniere chainee, trouve dans le tableau suivant
      */
@@ -51,7 +58,7 @@ public class ListeChaineePlacesLibres implements Liste {
     public int suc(int p) {
 	return this.tab[p].getSuc();
     }
-    
+
     /**
      * valeur trouvee dans le tableau valeur
      */
@@ -59,8 +66,8 @@ public class ListeChaineePlacesLibres implements Liste {
     public String val(int p) {
 	return this.tab[p].getVal();
     }
-    
-	
+
+
     /**
      * suppression d'un element de la liste
      * avec gestion de la liste libre
@@ -74,7 +81,7 @@ public class ListeChaineePlacesLibres implements Liste {
 	    this.tete = courant.getSuc();
 	    //on libere la place
 	    this.libererPlace(p);
-	    
+
 	} else {
 	    int place = this.tete;
 	    // trouver le precedent
@@ -84,7 +91,7 @@ public class ListeChaineePlacesLibres implements Liste {
 	    this.tab[place].setSuc(courant.getSuc());
 	    this.libererPlace(p);
 	}
-	
+
     }
 
     /**
@@ -92,8 +99,8 @@ public class ListeChaineePlacesLibres implements Liste {
      * @param p place a liberer
      */
     private void libererPlace(int p) {
-	//A COMPLETER
-	throw (new error ("A compléter"));
+			this.tab[p].setSuc(this.teteLibre);
+			this.teteLibre = p;
     }
 
     /**
@@ -101,8 +108,8 @@ public class ListeChaineePlacesLibres implements Liste {
      */
     @Override
     public void adjtlis(String s) {
-	int libre = retournerPlaceLibre();
-		
+	int libre = this.retournerPlaceLibre();
+
 	//on decale la place libre vers l'ancienne tete
 	this.tab[libre].setSuc(this.tete);
 	//on met a jour la tete
@@ -129,13 +136,14 @@ public class ListeChaineePlacesLibres implements Liste {
      * @return la tete de la liste libre et met a jour la liste libre
      */
     public int retournerPlaceLibre() {
-	//A COMPLETER
-	throw (new error ("A compléter"));
+			int x = this.teteLibre;
+			this.teteLibre ++;
+			return x;
     }
-    
-	
+
+
     public String toString()
-    {	
+    {
 	String s="*******************\n* contenu liste CHAINEE *\n*******************\n";
 	int place=this.tete;
 	while(place!=-1)
@@ -146,7 +154,5 @@ public class ListeChaineePlacesLibres implements Liste {
 	s+="*******************";
 	return(s);
     }
-    
-    
-    
+
 }
