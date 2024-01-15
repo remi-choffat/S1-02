@@ -31,7 +31,7 @@ public class ListeTriee{
      * @return place derriere p dans la liste
      */
     public int suc(int p){
-	return liste[p].getSuc();
+	    return this.liste.suc(p);
     }
     
     /**
@@ -40,7 +40,7 @@ public class ListeTriee{
      * @return la valeur associee  p
      */
     public String val(int p){
-	return liste[p].getVal();
+	    return this.liste.val(p);
     }
  
     /**
@@ -49,7 +49,7 @@ public class ListeTriee{
      * @return vrai si p est a la fin de la liste, faux sinon
      */   
     public boolean finliste(int p){
-        return liste[p].suc==-1;
+        return this.liste.finliste(p);
     }
 	
     
@@ -58,7 +58,29 @@ public class ListeTriee{
      * @param chaine element a inserer
      */
     public void adjlisT(String chaine){
-	
+	int p = this.liste.tete();
+    int pPre =0;
+    boolean inserer = false;
+    while(!inserer && !this.liste.finliste(p)){
+        if(this.liste.val(p).compareTo(chaine)==1){
+            if(p==this.liste.tete()){
+                this.liste.adjtlis(chaine);
+            }
+            else{
+                this.liste.adjlis(pPre, chaine);
+            }
+            inserer=true;
+
+        }
+        else{
+            pPre=p;
+            p=this.liste.suc(p);
+        }
+
+    }
+    if(!inserer){
+        this.liste.adjlis(pPre, chaine);
+    }
     }
 	
     /**
@@ -66,8 +88,7 @@ public class ListeTriee{
      * @param chaine l'element a supprimer 
      */
     public void suplisT(String chaine){
-	//A COMPLETER
-	throw (new error ("A compléter"));
+	int ananas=0;
     }
 		
     public String toString(){
