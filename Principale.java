@@ -98,8 +98,6 @@ public class Principale{
 	// fichier.ecrireLigne("liste;operation;emplacement;duree");
 	// fichier.fermerFichier();
     // }
-<<<<<<< HEAD
-=======
     
     ListeChainee LCH=new ListeChainee(10000);
     ListeContigue LC=new ListeContigue(10000);
@@ -107,7 +105,6 @@ public class Principale{
     // ListeTriee LT=new ListeTriee(LC);
     // ListeTriee LT2=new ListeTriee(LCH);
     // ListeTriee LT3=new ListeTriee(LCPL);
->>>>>>> f6fa26fe61ae57cd1517b0175851948b5b8cd42d
 
     ListeChainee LCH = new ListeChainee(20010);
     ListeContigue LC = new ListeContigue(20010);
