@@ -77,7 +77,7 @@ public class ListeTriee{
                 pPre=p;
                 p=this.liste.suc(p);
             }
-
+            
         }
         if(!insere){
             this.liste.adjlis(pPre, chaine);
