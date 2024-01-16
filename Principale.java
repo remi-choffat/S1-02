@@ -8,29 +8,29 @@
 
 public class Principale{
 
-    // private static final String[] ELEMENTS_DE_DEBUT
-	// = {"ABITEBOUL", "ADLEMAN", "AL-KINDI", "ALUR", "BERNERS-LEE",
-	// "BOOLE", "BUCHI", "BUTLER", "CLARKE", "CURRY"};
-    // private static final String[] ELEMENTS_DE_FIN
-	// = {"RABIN", "RIVEST", "SHAMIR", "SIFAKIS", "TORVALDS",
-	// "TURING", "ULLMAN", "VALIANT", "WIRTH", "YAO"};
+    private static final String[] ELEMENTS_DE_DEBUT
+	= {"ABITEBOUL", "ADLEMAN", "AL-KINDI", "ALUR", "BERNERS-LEE",
+	"BOOLE", "BUCHI", "BUTLER", "CLARKE", "CURRY"};
+    private static final String[] ELEMENTS_DE_FIN
+	= {"RABIN", "RIVEST", "SHAMIR", "SIFAKIS", "TORVALDS",
+	"TURING", "ULLMAN", "VALIANT", "WIRTH", "YAO"};
     
-    // // NOTE: pour fichier 10 000
+    // NOTE: pour fichier 10 000
     // private static final String[] ELEMENTS_DE_DEBUT_SUPPR
     // = {"ABBADI", "ABERGEL", "ALIAS", "ALIOUI", "AKKUS", "ALAZARD",
     // "ALLA", "AIDARA", "ABRANTES", "AARAB"};
-    // NOTE: pour fichier 1 000
-    //private static final String[] ELEMENTS_DE_DEBUT_SUPPR
+    // //NOTE: pour fichier 1 000
+    // private static final String[] ELEMENTS_DE_DEBUT_SUPPR
     // = {"ABADIE", "ABDALLAH", "ABRAHAM", "ADAM", "AFONSO",
     // "ALBERT", "ALEXANDRE", "ALI", "ALIX", "ALLAIN"};
-    // NOTE: pour fichier 10 000
-    //private static final String[] ELEMENTS_DE_FIN_SUPPR
+    // //NOTE: pour fichier 10 000
+    // private static final String[] ELEMENTS_DE_FIN_SUPPR
     // = {"WEIS", "ZANIN", "WERQUIN", "YAGOUBI", "WERNERT",
-    // "WAWRZYNIAK", "ZULIANI", "ZAIRE", "WAVRANT", "VILLAR"}; //
-    // NOTE: pour fichier 1 000
-    //private static final String[] ELEMENTS_DE_FIN_SUPPR
-    //= {"WEBER", "WEISS", "WINTERSTEIN", "WOLFF", "YANG",
-    //"YILDIRIM", "YILDIZ", "YILMAZ", "ZIEGLER", "ZIMMERMANN"}; //
+    // "WAWRZYNIAK", "ZULIANI", "ZAIRE", "WAVRANT", "VILLAR"}; 
+    // //NOTE: pour fichier 1 000
+    // private static final String[] ELEMENTS_DE_FIN_SUPPR
+    // = {"WEBER", "WEISS", "WINTERSTEIN", "WOLFF", "YANG",
+    // "YILDIRIM", "YILDIZ", "YILMAZ", "ZIEGLER", "ZIMMERMANN"}; 
 	
     // Type des listes, peut etre utile pour factoriser les tests
     private static final int CONTIGUE	       = 1;
@@ -59,13 +59,25 @@ public class Principale{
     
     ListeChainee LCH=new ListeChainee(10000);
     ListeContigue LC=new ListeContigue(10000);
-    ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(10000);
+    ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(50000);
     // ListeTriee LT=new ListeTriee(LC);
     // ListeTriee LT2=new ListeTriee(LCH);
     // ListeTriee LT3=new ListeTriee(LCPL);
 
     ListeTriee L1=new ListeTriee(LCPL);
-    remplir_liste(L1,"noms100.txt");
-    System.out.println(L1);
+    remplir_liste(L1,"noms10000.txt");
+
+
+    //QUESTION 7
+    ListeTriee ListeTrieeLCPL = new ListeTriee(LCPL);
+    remplir_liste(ListeTrieeLCPL,"noms10000.txt");
+    long date_debut = System.nanoTime();
+    for(int i=0; i<10;i++){
+        ListeTrieeLCPL.adjlisT(ELEMENTS_DE_DEBUT[i]);
+    }
+    long date_fin = System.nanoTime();
+    long duree = date_fin - date_debut ;
+    System.out.println(duree);
 }
+
 }
