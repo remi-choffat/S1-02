@@ -63,7 +63,7 @@ public class ListeTriee{
       boolean insere = false;
       if (!this.liste.finliste(p)){
         while(!insere && !this.liste.finliste(p)){
-            if(this.liste.val(p).compareTo(chaine)==1){
+            if(this.liste.val(p).compareTo(chaine)>0){
                 if(p==this.liste.tete()){
                     this.liste.adjtlis(chaine);
                 }
