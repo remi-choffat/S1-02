@@ -60,9 +60,12 @@ public class Principale{
     ListeChainee LCH=new ListeChainee(10000);
     ListeContigue LC=new ListeContigue(10000);
     ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(10000);
-    ListeTriee LT=new ListeTriee(LC);
-    ListeTriee LT2=new ListeTriee(LCH);
-    ListeTriee LT3=new ListeTriee(LCPL);
+    // ListeTriee LT=new ListeTriee(LC);
+    // ListeTriee LT2=new ListeTriee(LCH);
+    // ListeTriee LT3=new ListeTriee(LCPL);
 
+    ListeTriee L1=new ListeTriee(LCPL);
+    remplir_liste(L1,"noms100.txt");
+    System.out.println(L1);
 }
 }
