@@ -1,8 +1,5 @@
 /**
  * Classe principale de la SAÉ
- * @author Étienne André Sergueï Lenglet
- * @since 2021-11-04
- *
  */
 
 
@@ -14,7 +11,7 @@ public class Principale{
     private static final String[] ELEMENTS_DE_FIN
 	= {"RABIN", "RIVEST", "SHAMIR", "SIFAKIS", "TORVALDS",
 	"TURING", "ULLMAN", "VALIANT", "WIRTH", "YAO"};
-    
+
     // NOTE: pour fichier 10 000
     // private static final String[] ELEMENTS_DE_DEBUT_SUPPR
     // = {"ABBADI", "ABERGEL", "ALIAS", "ALIOUI", "AKKUS", "ALAZARD",
@@ -26,27 +23,72 @@ public class Principale{
     // //NOTE: pour fichier 10 000
     // private static final String[] ELEMENTS_DE_FIN_SUPPR
     // = {"WEIS", "ZANIN", "WERQUIN", "YAGOUBI", "WERNERT",
-    // "WAWRZYNIAK", "ZULIANI", "ZAIRE", "WAVRANT", "VILLAR"}; 
+    // "WAWRZYNIAK", "ZULIANI", "ZAIRE", "WAVRANT", "VILLAR"};
     // //NOTE: pour fichier 1 000
     // private static final String[] ELEMENTS_DE_FIN_SUPPR
     // = {"WEBER", "WEISS", "WINTERSTEIN", "WOLFF", "YANG",
-    // "YILDIRIM", "YILDIZ", "YILMAZ", "ZIEGLER", "ZIMMERMANN"}; 
-	
+    // "YILDIRIM", "YILDIZ", "YILMAZ", "ZIEGLER", "ZIMMERMANN"};
+
     // Type des listes, peut etre utile pour factoriser les tests
     private static final int CONTIGUE	       = 1;
     private static final int CHAINEE	       = 2;
     private static final int CHAINEE_PLIBRES   = 3;
-	
+
     // Exemple d'utilisation de LectureFichier et remplissage d'une liste
     public static void remplir_liste(ListeTriee liste, String nom_fichier){
 	LectureFichier lf = new LectureFichier(nom_fichier);
-	// 		
+	//
 	String[] liste_noms = lf.lireFichier();
 	for (int i = 0; i < liste_noms.length; i++) {
 	    liste.adjlisT(liste_noms[i]);
 	}
     }
-		
+
+    /**
+     * calcule le temps nécessaire à 10 opérations d'ajout sur une liste
+     * @param l la liste sur laquelle faire les opérations
+     * @param chaine les chaines a inserer dans la liste
+     * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
+     * @return le temps nécessaire pour effectuer les 10 opérations
+     */
+    public static long calculerTemps(ListeTriee l, String[] chaines, int operation){
+      remplir_liste(l,"noms10000.txt");
+      long date_debut = System.nanoTime();
+      if (operation == 1){
+        for(int i=0; i<10;i++){
+            l.adjlisT(chaines[i]);
+        }
+      }
+      else {
+        for(int i=0; i<10;i++){
+          l.suplisT(chaines[i]);
+        }
+      }
+      long date_fin = System.nanoTime();
+      long duree = date_fin - date_debut ;
+      return duree;
+    }
+
+    /**
+     * affiche les mesures des temps d'execution
+     * @param typeListe le type d'implementation a utiliser (ListeChainee, ListeContigue, ListeChaineePlacesLibres)
+     * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
+     * @param chaine les chaines a inserer dans la liste
+     */
+    public static void mesurer(String typeListe, int operation, String[] chaines){
+      ListeChainee lch = new ListeChainee(20010);
+      ListeContigue lc = new ListeContigue(20010);
+      ListeChaineePlacesLibres lcpl = new ListeChaineePlacesLibres(20010);
+      ListeTriee liste;
+      String ope = " ajout ";
+      if (operation == -1) ope = " suppression ";
+      if (typeListe.equals("ListeChainee")) liste = new ListeTriee(lch);
+      else if (typeListe.equals("ListeContigue")) liste = new ListeTriee(lc);
+      else liste = new ListeTriee(lcpl);
+      System.out.println("Temps d'exécution pour"+ope+typeListe+" : "+calculerTemps(liste, chaines, operation)+" nanosecondes");
+    }
+
+
     public static void main(String [] args){
 	// System.out.println("Bienvenue !");
 
@@ -56,28 +98,39 @@ public class Principale{
 	// fichier.ecrireLigne("liste;operation;emplacement;duree");
 	// fichier.fermerFichier();
     // }
-    
-    ListeChainee LCH=new ListeChainee(10000);
-    ListeContigue LC=new ListeContigue(10000);
-    ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(50000);
-    // ListeTriee LT=new ListeTriee(LC);
-    // ListeTriee LT2=new ListeTriee(LCH);
-    // ListeTriee LT3=new ListeTriee(LCPL);
 
+    ListeChainee LCH = new ListeChainee(20010);
+    ListeContigue LC = new ListeContigue(20010);
+    ListeChaineePlacesLibres LCPL = new ListeChaineePlacesLibres(20010);
+
+    ListeChainee LCH2 = new ListeChainee(20010);
+    ListeContigue LC2 = new ListeContigue(20010);
+    ListeChaineePlacesLibres LCPL2 = new ListeChaineePlacesLibres(20010);
+
+    // QUESTION 6
     ListeTriee L1=new ListeTriee(LCPL);
     remplir_liste(L1,"noms10000.txt");
 
+    // QUESTION 7
+    mesurer("ListeChainee", 1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeContigue", 1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeChaineePlacesLibres", 1, ELEMENTS_DE_DEBUT);
 
-    //QUESTION 7
-    ListeTriee ListeTrieeLCPL = new ListeTriee(LCPL);
-    remplir_liste(ListeTrieeLCPL,"noms10000.txt");
-    long date_debut = System.nanoTime();
-    for(int i=0; i<10;i++){
-        ListeTrieeLCPL.adjlisT(ELEMENTS_DE_DEBUT[i]);
-    }
-    long date_fin = System.nanoTime();
-    long duree = date_fin - date_debut ;
-    System.out.println(duree);
+    // QUESTION 8
+    mesurer("ListeChainee", 1, ELEMENTS_DE_FIN);
+    mesurer("ListeContigue", 1, ELEMENTS_DE_FIN);
+    mesurer("ListeChaineePlacesLibres", 1, ELEMENTS_DE_FIN);
+
+    // QUESTION 10
+    mesurer("ListeChainee", -1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeContigue", -1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeChaineePlacesLibres", -1, ELEMENTS_DE_DEBUT);
+
+    // QUESTION 11
+    mesurer("ListeChainee", -1, ELEMENTS_DE_FIN);
+    mesurer("ListeContigue", -1, ELEMENTS_DE_FIN);
+    mesurer("ListeChaineePlacesLibres", -1, ELEMENTS_DE_FIN);
+
 }
 
 }
