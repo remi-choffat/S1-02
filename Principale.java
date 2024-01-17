@@ -93,43 +93,54 @@ public class Principale{
 
 
     public static void main(String [] args){
-	// System.out.println("Bienvenue !");
 
-	// //Exemple d'utilisation de la classe EcritureFichier
-	// EcritureFichier fichier = new EcritureFichier("resultats.csv");
-	// fichier.ouvrirFichier();
-	// fichier.ecrireLigne("liste;operation;emplacement;duree");
-	// fichier.fermerFichier();
-    // }
+    // ListeChainee LCH=new ListeChainee(10000);
+    // ListeContigue LC=new ListeContigue(10000);
+    // ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(20010);
 
-    ListeChainee LCH=new ListeChainee(10000);
-    ListeContigue LC=new ListeContigue(10000);
-    ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(20010);
+    // // QUESTION 6
+    // ListeTriee L1=new ListeTriee(LCPL);
+    // remplir_liste(L1,"noms10000.txt");
 
-    // QUESTION 6
-    ListeTriee L1=new ListeTriee(LCPL);
-    remplir_liste(L1,"noms10000.txt");
+    // // QUESTION 7
+    // mesurer("ListeChainee", 1, "debut");
+    // mesurer("ListeContigue", 1, "debut");
+    // mesurer("ListeChaineePlacesLibres", 1, "debut");
 
-    // QUESTION 7
-    mesurer("ListeChainee", 1, "debut");
-    mesurer("ListeContigue", 1, "debut");
-    mesurer("ListeChaineePlacesLibres", 1, "debut");
+    // // QUESTION 8
+    // mesurer("ListeChainee", 1, "fin");
+    // mesurer("ListeContigue", 1, "fin");
+    // mesurer("ListeChaineePlacesLibres", 1, "fin");
 
-    // QUESTION 8
-    mesurer("ListeChainee", 1, "fin");
-    mesurer("ListeContigue", 1, "fin");
-    mesurer("ListeChaineePlacesLibres", 1, "fin");
+    // // QUESTION 10
+    // mesurer("ListeChainee", -1, "debut");
+    // mesurer("ListeContigue", -1, "debut");
+    // mesurer("ListeChaineePlacesLibres", -1, "debut");
 
-    // QUESTION 10
-    mesurer("ListeChainee", -1, "debut");
-    mesurer("ListeContigue", -1, "debut");
-    mesurer("ListeChaineePlacesLibres", -1, "debut");
+    // // QUESTION 11
+    // mesurer("ListeChainee", -1, "fin");
+    // mesurer("ListeContigue", -1, "fin");
+    // mesurer("ListeChaineePlacesLibres", -1, "fin");
 
-    // QUESTION 11
-    mesurer("ListeChainee", -1, "fin");
-    mesurer("ListeContigue", -1, "fin");
-    mesurer("ListeChaineePlacesLibres", -1, "fin");
 
+    // QUESTION 12 
+    EcritureFichier fichier = new EcritureFichier("resultats.csv");
+    fichier.ouvrirFichier();
+    fichier.ecrireLigne("liste;operation;emplacement;duree");
+    fichier.ecrireLigne(mesurer("ListeChainee", 1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeContigue", 1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeChainee", 1, "fin"));
+    fichier.ecrireLigne(mesurer("ListeContigue", 1, "fin"));
+    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "fin"));
+    fichier.ecrireLigne(mesurer("ListeChainee", -1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeContigue", -1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "debut"));
+    fichier.ecrireLigne(mesurer("ListeChainee", -1, "fin"));
+    fichier.ecrireLigne(mesurer("ListeContigue", -1, "fin"));
+    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "fin"));
+  
+    fichier.fermerFichier();
 }
 
 }
