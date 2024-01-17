@@ -39,14 +39,17 @@ public class PrincipaleVariationTaille {
 	}
     }
 
+
     /**
      * calcule le temps nécessaire à 10 opérations d'ajout sur une liste
      * @param typeListe le type d'implementation a utiliser (ListeChainee, ListeContigue, ListeChaineePlacesLibres)
      * @param chaine les chaines a inserer dans la liste
      * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
+     * @param nbNoms le combre de chaînes à ajouter à la liste
      * @return le temps nécessaire pour effectuer les 10 opérations
      */
-    public static long calculerTemps(String typeListe, String[] chaines, int operation){
+    public static long calculerTemps(String typeListe, String[] chaines, int operation, int nbNoms){
+
       long total = 0;
       ListeTriee l = null;
 
@@ -54,17 +57,37 @@ public class PrincipaleVariationTaille {
 
         switch(typeListe){
           case "ListeChainee":
-            l = new ListeTriee(new ListeChainee(20010));
+            l = new ListeTriee(new ListeChainee((nbNoms*2)+10));
             break;
           case "ListeContigue":
-            l = new ListeTriee(new ListeContigue(20010));
+            l = new ListeTriee(new ListeContigue((nbNoms*2)+10)));
             break;
           case "ListeChaineePlacesLibres":
-            l = new ListeTriee(new ListeChaineePlacesLibres(20010));
+            l = new ListeTriee(new ListeChaineePlacesLibres((nbNoms*2)+10)));
+            break;
+          default:
+            l = new ListeTriee(new ListeChainee((nbNoms*2)+10));
             break;
         }
 
-        remplir_liste(l,"noms10000.txt");   
+        switch(nbNoms){ // Modifié à la question 14
+          case 100:
+            remplir_liste(l,"noms100.txt");
+            break;
+          case 1000:
+            remplir_liste(l,"noms1000.txt");
+            break;
+          case 10000:
+            remplir_liste(l,"noms10000.txt");
+            break;
+          case 100000:
+            remplir_liste(l,"noms100000.txt");
+            break;
+          default:
+            remplir_liste(l,"noms1000.txt");
+            break;
+        }
+
         long date_debut = System.nanoTime();
         if (operation == 1){
           for(int i=0; i<10;i++){
@@ -131,22 +154,24 @@ public class PrincipaleVariationTaille {
     // mesurer("ListeChaineePlacesLibres", -1, "fin");
 
 
-    // QUESTION 12
+    // QUESTION 12 (modification QUESTION 14)
     EcritureFichier fichier = new EcritureFichier("resultats.csv");
     fichier.ouvrirFichier();
     fichier.ecrireLigne("liste;operation;emplacement;duree");
-    fichier.ecrireLigne(mesurer("ListeChainee", 1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeContigue", 1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeChainee", 1, "fin"));
-    fichier.ecrireLigne(mesurer("ListeContigue", 1, "fin"));
-    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "fin"));
-    fichier.ecrireLigne(mesurer("ListeChainee", -1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeContigue", -1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "debut"));
-    fichier.ecrireLigne(mesurer("ListeChainee", -1, "fin"));
-    fichier.ecrireLigne(mesurer("ListeContigue", -1, "fin"));
-    fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "fin"));
+    for (i=100; i<=10000; i=i*10){
+      fichier.ecrireLigne(mesurer("ListeChainee", 1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeContigue", 1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeChainee", 1, "fin", i));
+      fichier.ecrireLigne(mesurer("ListeContigue", 1, "fin", i));
+      fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "fin", i));
+      fichier.ecrireLigne(mesurer("ListeChainee", -1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeContigue", -1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "debut", i));
+      fichier.ecrireLigne(mesurer("ListeChainee", -1, "fin", i));
+      fichier.ecrireLigne(mesurer("ListeContigue", -1, "fin", i));
+      fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "fin", i));
+    }
     fichier.fermerFichier();
 }
 
