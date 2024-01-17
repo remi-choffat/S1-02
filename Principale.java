@@ -46,27 +46,47 @@ public class Principale{
 
     /**
      * calcule le temps nécessaire à 10 opérations d'ajout sur une liste
-     * @param l la liste sur laquelle faire les opérations
+     * @param typeListe le type d'implementation a utiliser (ListeChainee, ListeContigue, ListeChaineePlacesLibres)
      * @param chaine les chaines a inserer dans la liste
      * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
      * @return le temps nécessaire pour effectuer les 10 opérations
      */
-    public static long calculerTemps(ListeTriee l, String[] chaines, int operation){
-      remplir_liste(l,"noms10000.txt");
-      long date_debut = System.nanoTime();
-      if (operation == 1){
-        for(int i=0; i<10;i++){
-            l.adjlisT(chaines[i]);
+    public static long calculerTemps(String typeListe, String[] chaines, int operation){
+      long total = 0;
+      ListeTriee l = null;
+
+      for (int j=0; j<100; j++){  // Modifié à la question 13
+
+        switch(typeListe){
+          case "ListeChainee":
+            l = new ListeTriee(new ListeChainee(20010));
+            break;
+          case "ListeContigue":
+            l = new ListeTriee(new ListeContigue(20010));
+            break;
+          case "ListeChaineePlacesLibres":
+            l = new ListeTriee(new ListeChaineePlacesLibres(20010));
+            break;
         }
-      }
-      else {
-        for(int i=0; i<10;i++){
-          l.suplisT(chaines[i]);
+
+        remplir_liste(l,"noms10000.txt");
+        long date_debut = System.nanoTime();
+        if (operation == 1){
+          for(int i=0; i<10;i++){
+              l.adjlisT(chaines[i]);
+          }
         }
+        else {
+          for(int i=0; i<10;i++){
+            l.suplisT(chaines[i]);
+          }
+        }
+        long date_fin = System.nanoTime();
+        long duree = date_fin - date_debut;
+        total += duree;
+
       }
-      long date_fin = System.nanoTime();
-      long duree = date_fin - date_debut ;
-      return duree;
+      return total/100;
     }
 
     /**
@@ -77,18 +97,11 @@ public class Principale{
      * @return un affichage des résultats de la mesure (liste;operation;emplacement;duree(ns))
      */
     public static String mesurer(String typeListe, int operation, String chaines){
-      ListeChainee lch = new ListeChainee(20010);
-      ListeContigue lc = new ListeContigue(20010);
-      ListeChaineePlacesLibres lcpl = new ListeChaineePlacesLibres(20010);
-      ListeTriee liste;
       String ope = "ajout";
       String[] ch = ELEMENTS_DE_DEBUT;
       if (chaines == "fin") ch = ELEMENTS_DE_FIN;
       if (operation == -1) ope = "suppression";
-      if (typeListe.equals("ListeChainee")) liste = new ListeTriee(lch);
-      else if (typeListe.equals("ListeContigue")) liste = new ListeTriee(lc);
-      else liste = new ListeTriee(lcpl);
-      return (typeListe+";"+ope+";"+chaines+";"+calculerTemps(liste, ch, operation));
+      return (typeListe+";"+ope+";"+chaines+";"+calculerTemps(typeListe, ch, operation));
     }
 
 
@@ -123,7 +136,7 @@ public class Principale{
     // mesurer("ListeChaineePlacesLibres", -1, "fin");
 
 
-    // QUESTION 12 
+    // QUESTION 12
     EcritureFichier fichier = new EcritureFichier("resultats.csv");
     fichier.ouvrirFichier();
     fichier.ecrireLigne("liste;operation;emplacement;duree");
@@ -139,7 +152,6 @@ public class Principale{
     fichier.ecrireLigne(mesurer("ListeChainee", -1, "fin"));
     fichier.ecrireLigne(mesurer("ListeContigue", -1, "fin"));
     fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", -1, "fin"));
-  
     fichier.fermerFichier();
 }
 

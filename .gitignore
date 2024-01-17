@@ -1,3 +1,4 @@
-# Ignorer tous les fichiers .class et .pdf
+# Ignorer tous les fichiers .class, .pdf et .csv
 *.class
 *.pdf
+*.csv
