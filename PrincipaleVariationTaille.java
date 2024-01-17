@@ -60,10 +60,10 @@ public class PrincipaleVariationTaille {
             l = new ListeTriee(new ListeChainee((nbNoms*2)+10));
             break;
           case "ListeContigue":
-            l = new ListeTriee(new ListeContigue((nbNoms*2)+10)));
+            l = new ListeTriee(new ListeContigue((nbNoms*2)+10));
             break;
           case "ListeChaineePlacesLibres":
-            l = new ListeTriee(new ListeChaineePlacesLibres((nbNoms*2)+10)));
+            l = new ListeTriee(new ListeChaineePlacesLibres((nbNoms*2)+10));
             break;
           default:
             l = new ListeTriee(new ListeChainee((nbNoms*2)+10));
@@ -112,14 +112,15 @@ public class PrincipaleVariationTaille {
      * @param typeListe le type d'implementation a utiliser (ListeChainee, ListeContigue, ListeChaineePlacesLibres)
      * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
      * @param chaine l'emplacement des chaines a inserer dans la liste
+     * @param nbNoms le combre de chaînes à ajouter à la liste
      * @return un affichage des résultats de la mesure (liste;operation;emplacement;duree(ns))
      */
-    public static String mesurer(String typeListe, int operation, String chaines){
+    public static String mesurer(String typeListe, int operation, String chaines, int nbNoms){
       String ope = "ajout";
       String[] ch = ELEMENTS_DE_DEBUT;
       if (chaines == "fin") ch = ELEMENTS_DE_FIN;
       if (operation == -1) ope = "suppression";
-      return (typeListe+";"+ope+";"+chaines+";"+calculerTemps(typeListe, ch, operation));
+      return (typeListe+";"+ope+";"+chaines+";"+calculerTemps(typeListe, ch, operation, nbNoms));
     }
 
 
@@ -158,7 +159,7 @@ public class PrincipaleVariationTaille {
     EcritureFichier fichier = new EcritureFichier("resultats.csv");
     fichier.ouvrirFichier();
     fichier.ecrireLigne("liste;operation;emplacement;duree");
-    for (i=100; i<=10000; i=i*10){
+    for (int i=100; i<=10000; i=i*10){
       fichier.ecrireLigne(mesurer("ListeChainee", 1, "debut", i));
       fichier.ecrireLigne(mesurer("ListeContigue", 1, "debut", i));
       fichier.ecrireLigne(mesurer("ListeChaineePlacesLibres", 1, "debut", i));
