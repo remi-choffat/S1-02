@@ -73,19 +73,22 @@ public class Principale{
      * affiche les mesures des temps d'execution
      * @param typeListe le type d'implementation a utiliser (ListeChainee, ListeContigue, ListeChaineePlacesLibres)
      * @param operation l'operation a effectuer (1 pour un ajout, -1 pour une suppression)
-     * @param chaine les chaines a inserer dans la liste
+     * @param chaine l'emplacement des chaines a inserer dans la liste
+     * @return un affichage des résultats de la mesure (liste;operation;emplacement;duree(ns))
      */
-    public static void mesurer(String typeListe, int operation, String[] chaines){
+    public static String mesurer(String typeListe, int operation, String chaines){
       ListeChainee lch = new ListeChainee(20010);
       ListeContigue lc = new ListeContigue(20010);
       ListeChaineePlacesLibres lcpl = new ListeChaineePlacesLibres(20010);
       ListeTriee liste;
-      String ope = " ajout ";
-      if (operation == -1) ope = " suppression ";
+      String ope = "ajout";
+      String[] ch = ELEMENTS_DE_DEBUT;
+      if (chaines == "fin") ch = ELEMENTS_DE_FIN;
+      if (operation == -1) ope = "suppression";
       if (typeListe.equals("ListeChainee")) liste = new ListeTriee(lch);
       else if (typeListe.equals("ListeContigue")) liste = new ListeTriee(lc);
       else liste = new ListeTriee(lcpl);
-      System.out.println("Temps d'exécution pour"+ope+typeListe+" : "+calculerTemps(liste, chaines, operation)+" nanosecondes");
+      return (typeListe+";"+ope+";"+chaines+";"+calculerTemps(liste, ch, operation));
     }
 
 
@@ -98,45 +101,34 @@ public class Principale{
 	// fichier.ecrireLigne("liste;operation;emplacement;duree");
 	// fichier.fermerFichier();
     // }
-    
+
     ListeChainee LCH=new ListeChainee(10000);
     ListeContigue LC=new ListeContigue(10000);
     ListeChaineePlacesLibres LCPL=new ListeChaineePlacesLibres(20010);
-    // ListeTriee LT=new ListeTriee(LC);
-    // ListeTriee LT2=new ListeTriee(LCH);
-    // ListeTriee LT3=new ListeTriee(LCPL);
-
-    ListeChainee LCH = new ListeChainee(20010);
-    ListeContigue LC = new ListeContigue(20010);
-    ListeChaineePlacesLibres LCPL = new ListeChaineePlacesLibres(20010);
-
-    ListeChainee LCH2 = new ListeChainee(20010);
-    ListeContigue LC2 = new ListeContigue(20010);
-    ListeChaineePlacesLibres LCPL2 = new ListeChaineePlacesLibres(20010);
 
     // QUESTION 6
     ListeTriee L1=new ListeTriee(LCPL);
     remplir_liste(L1,"noms10000.txt");
 
     // QUESTION 7
-    mesurer("ListeChainee", 1, ELEMENTS_DE_DEBUT);
-    mesurer("ListeContigue", 1, ELEMENTS_DE_DEBUT);
-    mesurer("ListeChaineePlacesLibres", 1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeChainee", 1, "debut");
+    mesurer("ListeContigue", 1, "debut");
+    mesurer("ListeChaineePlacesLibres", 1, "debut");
 
     // QUESTION 8
-    mesurer("ListeChainee", 1, ELEMENTS_DE_FIN);
-    mesurer("ListeContigue", 1, ELEMENTS_DE_FIN);
-    mesurer("ListeChaineePlacesLibres", 1, ELEMENTS_DE_FIN);
+    mesurer("ListeChainee", 1, "fin");
+    mesurer("ListeContigue", 1, "fin");
+    mesurer("ListeChaineePlacesLibres", 1, "fin");
 
     // QUESTION 10
-    mesurer("ListeChainee", -1, ELEMENTS_DE_DEBUT);
-    mesurer("ListeContigue", -1, ELEMENTS_DE_DEBUT);
-    mesurer("ListeChaineePlacesLibres", -1, ELEMENTS_DE_DEBUT);
+    mesurer("ListeChainee", -1, "debut");
+    mesurer("ListeContigue", -1, "debut");
+    mesurer("ListeChaineePlacesLibres", -1, "debut");
 
     // QUESTION 11
-    mesurer("ListeChainee", -1, ELEMENTS_DE_FIN);
-    mesurer("ListeContigue", -1, ELEMENTS_DE_FIN);
-    mesurer("ListeChaineePlacesLibres", -1, ELEMENTS_DE_FIN);
+    mesurer("ListeChainee", -1, "fin");
+    mesurer("ListeContigue", -1, "fin");
+    mesurer("ListeChaineePlacesLibres", -1, "fin");
 
 }
 
